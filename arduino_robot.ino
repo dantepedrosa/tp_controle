@@ -1,7 +1,7 @@
-#include "config.h"
-#include "Motor.h"
-#include "Encoder.h"
-#include "PID.h"
+#include "include/config.h"
+#include "include/Motor.h"
+#include "include/Encoder.h"
+#include "include/PID.h"
 
 // Instâncias (ajuste pinos em config.h)
 Motor leftMotor(LEFT_PWM, LEFT_IN1, LEFT_IN2);

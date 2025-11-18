@@ -1,4 +1,4 @@
-#include "Motor.h"
+#include "../include/Motor.h"
 
 Motor::Motor(uint8_t pwmPin, uint8_t in1, uint8_t in2)
   : _pwm(pwmPin), _in1(in1), _in2(in2) {}

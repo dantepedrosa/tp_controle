@@ -1,4 +1,4 @@
-#include "PID.h"
+#include "../include/PID.h"
 
 PID::PID(float kp, float ki, float kd)
   : _kp(kp), _ki(ki), _kd(kd), _minOut(-255), _maxOut(255), _integral(0), _lastError(0), _lastTime(0) {}

@@ -1,4 +1,4 @@
-#include "Encoder.h"
+#include "../include/Encoder.h"
 
 volatile long Encoder::_pulses = 0;
 uint8_t Encoder::_pinForAttach = 255;
