@@ -20,3 +20,7 @@ Observações importantes:
 - O código é um ponto de partida: calibrar `PULSES_PER_REV`, `WHEEL_DIAMETER_M` e os parâmetros do PID.
 - Atualmente o `Encoder` usa uma única interrupção (um canal). Para encoders quadratura, substituir por uma implementação de dois canais.
 -- `analogWrite` em ESP8266/ESP32 pode precisar de ajustes. Para ESP8266 o projeto já chama `analogWriteRange(255)` em `Motor::begin()`.
+
+# README
+
+Criar arquivo README vazio.
