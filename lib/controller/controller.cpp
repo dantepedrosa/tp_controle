@@ -10,7 +10,7 @@
  * @author Seu Nome
  */
 
-#include "../include/controller.h"
+#include "../../lib/controller/controller.h"
 
 // Constructor
 Controller::Controller() { /* placeholder */ }

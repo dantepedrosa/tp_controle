@@ -1,5 +1,5 @@
 /**
- * @file encoder_test.ino
+ * @file encoder_test.cpp
  * @brief Teste unitario do encoder: contagem de pulsos e calculo de RPM.
  *
  * @date nov de 2025

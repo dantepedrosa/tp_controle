@@ -1,5 +1,5 @@
 /**
- * @file motor_test.ino
+ * @file motor_test.cpp
  * @brief Teste unitario do MOTOR: resposta a PWM e direcao.
  *
  * @date nov de 2025
