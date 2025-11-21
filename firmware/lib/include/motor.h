@@ -1,50 +1,39 @@
 /**
  * @file motor.h
- * @brief Interface para controle do motor via PWM.
+ * @brief Interface de controle dos motores DC por PWM.
  *
- * Este modulo envia sinais de PWM ao motor,
- * controla direcao e gera sinais de teste como degrau.
+ * Este modulo permite configurar os pinos de acionamento do motor,
+ * controlar velocidade via PWM e definir direcao de rotacao.
  *
- * @date 2025-11-18
- * @author Dante
+ * @date nov de 2025
+ * @author Dante Junqueira Pedrosa
+ * @author Joao Monteiro Delveaux Silva
+ * @author Samantha Kelly de Souza Sena
+ * @author Felipe Augusto Cruz Sousa
  */
 
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#include <Arduino.h>
-
 /**
- * @brief Configura os pinos do motor (PWM e direcao).
+ * @brief Configura os pinos utilizados para o controle do motor.
  *
- * Deve ser chamada no setup() antes de controlar o motor.
+ * Deve ser chamada apenas uma vez no setup().
  */
 void setupMotorPins();
 
 /**
- * @brief Ajusta a velocidade do motor via PWM.
+ * @brief Define a velocidade e direcao do motor.
  *
- * @param pwmValue Valor entre 0 e 255.
+ * @param pwmValue Valor entre -255 e 255 (sinal define direcao).
  */
 void setMotorSpeed(int pwmValue);
 
 /**
- * @brief Define a direcao de rotacao do motor.
+ * @brief Envia um degrau de PWM para testar resposta em malha aberta.
  *
- * @param forward true para frente / false para re.
+ * @param pwmValue Valor entre 0 e 255.
  */
-void setMotorDirection(bool forward);
-
-/**
- * @brief Envia PWM zero e para o motor imediatamente.
- */
-void stopMotor();
-
-/**
- * @brief Gera um sinal de entrada tipo degrau (step input).
- *
- * @param amplitude Intensidade do PWM entre 0 e 255.
- */
-void sendStepInput(int amplitude);
+void sendStepInput(int pwmValue);
 
 #endif // MOTOR_H

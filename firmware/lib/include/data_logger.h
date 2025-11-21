@@ -1,54 +1,41 @@
 /**
  * @file data_logger.h
- * @brief Interface para exportacao de dados via Serial.
+ * @brief Rotinas para salvar dados experimentais via Serial.
  *
- * Este modulo formata e imprime dados experimentais
- * para MATLAB, Python ou Excel.
+ * Permite registrar valores de RPM, PWM e tempo, para analise posterior
+ * e modelagem da funcao de transferencia real dos motores.
  *
- * @date 2025-11-18
- * @author Dante
+ * @date nov de 2025
+ * @author Dante Junqueira Pedrosa
+ * @author Joao Monteiro Delveaux Silva
+ * @author Samantha Kelly de Souza Sena
+ * @author Felipe Augusto Cruz Sousa
  */
 
 #ifndef DATA_LOGGER_H
 #define DATA_LOGGER_H
 
-#include <Arduino.h>
-
 /**
- * @brief Inicializa a Serial para log.
+ * @brief Inicializa configuracao de log.
  *
- * @param baudRate Taxa de transmissao (ex: 115200).
+ * Cria cabecalhos e prepara a comunicacao serial.
  */
-void setupLogger(unsigned long baudRate);
+void setupLogger();
 
 /**
- * @brief Envia tempo e RPM via Serial em formato CSV.
+ * @brief Registra um dado de RPM e PWM.
  *
- * @param rpm Valor atual de RPM.
- * @param time_ms Tempo de amostragem em ms.
+ * @param pwm Valor de PWM aplicado.
+ * @param rpm Valor de RPM medido.
  */
-void logRPM(float rpm, unsigned long time_ms);
+void logRPM(int pwm, float rpm);
 
 /**
- * @brief Log do controlador: referencia, medicao e controle.
+ * @brief Registra dados adicionais para controle.
  *
- * @param reference Valor desejado.
- * @param measured Valor medido (ex: RPM).
- * @param control Sinal de controle (PWM).
+ * @param setpoint Valor de referencia de RPM.
+ * @param control Saida calculada pelo controlador.
  */
-void logControl(float reference, float measured, float control);
-
-/**
- * @brief Imprime cabecalho CSV com nome das colunas.
- */
-void printCSVHeader();
-
-/**
- * @brief Envia valores no formato aceito pelo Serial Plotter.
- *
- * @param value1 Primeiro valor a ser exibido.
- * @param value2 Segundo valor a ser exibido.
- */
-void plotSerialDebug(float value1, float value2);
+void logControl(int setpoint, float control);
 
 #endif // DATA_LOGGER_H

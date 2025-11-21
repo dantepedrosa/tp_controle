@@ -1,18 +1,33 @@
 /**
  * @file motor.cpp
- * @brief Implementação do módulo de controle de motor.
- *
- * Implementação do módulo de controle de motor. Usa PWM para variar velocidade
- * e configura direção do motor. Fornece funções de baixo nível acessadas pelo
- * firmware principal.
- *
- * @date 2025-11-19
- * @author Seu Nome
+ * @brief Implementacao das funcoes declaradas em motor.h
+ * @date nov de 2025
+ *@author Dante Junqueira Pedrosa
+ *@author Joao Monte…
+ *@author Samantha…
+ *@author Felipe…
  */
 
-#include "../include/motor.h"
+#include "motor.h"
+#include "config.h"
+#include <Arduino.h>
 
-// ...existing code...
-Motor::Motor() { /* placeholder */ }
-void Motor::begin() { /* placeholder */ }
-void Motor::setPWM(int pwm) { /* placeholder */ }
+void setupMotorPins() {
+    pinMode(PIN_MOTOR_PWM, OUTPUT);
+    pinMode(PIN_MOTOR_DIR, OUTPUT);
+    digitalWrite(PIN_MOTOR_PWM, LOW);
+    digitalWrite(PIN_MOTOR_DIR, LOW);
+}
+
+void setMotorSpeed(int pwmValue) {
+    bool direction = (pwmValue >= 0);
+    int pwm = abs(pwmValue);
+    if (pwm > 255) pwm = 255;
+
+    digitalWrite(PIN_MOTOR_DIR, direction ? HIGH : LOW);
+    analogWrite(PIN_MOTOR_PWM, pwm);
+}
+
+void sendStepInput(int pwmValue) {
+    setMotorSpeed(pwmValue);
+}

@@ -6,8 +6,11 @@
  * usando interrupcoes e contagem de pulsos para calcular
  * a velocidade angular (RPM) do motor.
  *
- * @date 2025-11-18
- * @author Dante
+ * @date nov de 2025
+ * @author Dante Junqueira Pedrosa
+ * @author Joao Monteiro Delveaux Silva
+ * @author Samantha Kelly de Souza Sena
+ * @author Felipe Augusto Cruz Sousa
  */
 
 #ifndef ENCODER_H
