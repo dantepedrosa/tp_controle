@@ -3,3 +3,9 @@
 build/
 *.bin
 *.elf
+
+# Ignorar toda a pasta de documentacao do Doxygen
+/docs/doxygen/*
+
+# EXCETO manter o PDF final
+!/docs/doxygen/latex/refman.pdf
