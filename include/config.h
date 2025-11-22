@@ -72,6 +72,11 @@
 #endif
 
 // ======= DEBUG OPCIONAL =======
-#define DEBUG_SERIAL_BAUD 115200
+#define DEBUG_SERIAL_BAUD 9600
+
+// ======= ENCODER =======
+#ifndef PULSES_PER_REV
+#define PULSES_PER_REV 20
+#endif
 
 #endif // CONFIG_H
