@@ -4,6 +4,8 @@
 TEST_DIR_ACQ="test/acquisition_test"
 TEST_DIR_ENCODER="test/encoder_test"
 TEST_DIR_MOTOR="test/motor_test"
+TEST_DIR_CONFIG="test/config_test"
+
 
 # Origem das libs
 SRC_LIB="lib"
@@ -69,6 +71,21 @@ cp $SRC_LIB/motor/motor.h $TEST_DIR_MOTOR/
 cp $SRC_LIB/motor/motor.cpp $TEST_DIR_MOTOR/
 
 echo "Arquivos copiados para $TEST_DIR_MOTOR"
+
+##################################
+# 4) CONFIG TEST
+##################################
+echo ""
+echo "[CONFIG TEST]"
+
+rm -f $TEST_DIR_CONFIG/*.h
+rm -f $TEST_DIR_CONFIG/*.cpp
+
+cp $SRC_INCLUDE/config.h $TEST_DIR_CONFIG/
+
+echo "Arquivos copiados para $TEST_DIR_CONFIG"
+
+
 
 echo ""
 echo "Finalizado com sucesso!"
