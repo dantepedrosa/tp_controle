@@ -29,6 +29,22 @@ void setup() {
     setupEncoderPins();
     setupEncoderInterrupt();
     setupLogger();        // cabecalho CSV via Serial
+
+    // REMOVER COM CIRCUITO - Pisca o LED builtin para indicar que o loop esta rodando
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(500);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(500);
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(500);
 }
 
 void loop() {

@@ -29,6 +29,14 @@
 // ======= TEMPO DE AMOSTRAGEM =======
 #define Ts 0.01f     // tempo de amostragem em segundos (10 ms)
 
+// ======= DEBUG OPCIONAL =======
+#define DEBUG_SERIAL_BAUD 9600
+
+// ======= ENCODER =======
+#ifndef PULSES_PER_REV
+#define PULSES_PER_REV 20
+#s
+
 // ======= DETECCAO DA PLACA =======
 #if defined(ESP32)
     #define BOARD_NAME "ESP32"
@@ -69,14 +77,6 @@
     #define PIN_ENCODER_A    2
     #define PIN_ENCODER_B    3
     #define PIN_LED_DEBUG    13
-#endif
-
-// ======= DEBUG OPCIONAL =======
-#define DEBUG_SERIAL_BAUD 9600
-
-// ======= ENCODER =======
-#ifndef PULSES_PER_REV
-#define PULSES_PER_REV 20
 #endif
 
 #endif // CONFIG_H
