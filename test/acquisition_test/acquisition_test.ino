@@ -31,6 +31,7 @@ const unsigned long stepDuration = 5000; // 5s por degrau
 void setup() {
     Serial.begin(DEBUG_SERIAL_BAUD);
     Serial.println("Iniciando acquisition_test...");
+    Serial.println("Salve todos os dados recebidos em ./data/dados_motor.csv");
 
     setupMotorPins();
     setupEncoderPins();
