@@ -37,8 +37,6 @@ void setup() {
     setupEncoderPins();
     setupEncoderInterrupts();   // interrupcoes A e B
     setupLogger();              // geração de CSV
-
-
 }
 
 void loop() {
