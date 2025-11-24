@@ -34,49 +34,102 @@
 
 // ======= ENCODER =======
 #ifndef PULSES_PER_REV
-#define PULSES_PER_REV 20
-#s
+#define PULSES_PER_REV 20        // definir real conforme data sheet do encoder
+#endif
 
-// ======= DETECCAO DA PLACA =======
+// ======= DETECCAO DA PLACA E DEFINIÇÃO DE PINOS =========
 #if defined(ESP32)
     #define BOARD_NAME "ESP32"
 
-    // Pinos do ESP32
-    #define PIN_MOTOR_PWM    23
-    #define PIN_MOTOR_DIR    22
-    #define PIN_ENCODER_A    34
-    #define PIN_ENCODER_B    35
-    #define PIN_LED_DEBUG    2
+    // MOTOR A - L298N
+    #define PIN_MOTOR_A_EN    23
+    #define PIN_MOTOR_A_IN1   22
+    #define PIN_MOTOR_A_IN2   21
+
+    // MOTOR B - L298N
+    #define PIN_MOTOR_B_EN    19
+    #define PIN_MOTOR_B_IN1   18
+    #define PIN_MOTOR_B_IN2   5
+
+    // ENCODER A
+    #define PIN_ENCODER_A_A   34
+    #define PIN_ENCODER_B_A   35
+
+    // ENCODER B
+    #define PIN_ENCODER_A_B   32
+    #define PIN_ENCODER_B_B   33
+
+    #define PIN_LED_DEBUG     2
 
 #elif defined(ESP8266)
     #define BOARD_NAME "ESP8266"
 
-    // Pinos do ESP8266 (NodeMCU)
-    #define PIN_MOTOR_PWM    D1
-    #define PIN_MOTOR_DIR    D2
-    #define PIN_ENCODER_A    D5
-    #define PIN_ENCODER_B    D6
-    #define PIN_LED_DEBUG    D4    // LED onboard
+    // MOTOR A - L298N
+    #define PIN_MOTOR_A_EN    D1
+    #define PIN_MOTOR_A_IN1   D2
+    #define PIN_MOTOR_A_IN2   D3
+
+    // MOTOR B - L298N
+    #define PIN_MOTOR_B_EN    D8
+    #define PIN_MOTOR_B_IN1   D7
+    #define PIN_MOTOR_B_IN2   D6
+
+    // ENCODER A
+    #define PIN_ENCODER_A_A   D5
+    #define PIN_ENCODER_B_A   D4
+
+    // ENCODER B
+    #define PIN_ENCODER_A_B   D0
+    #define PIN_ENCODER_B_B   D1
+
+    #define PIN_LED_DEBUG     D2
 
 #elif defined(ARDUINO_AVR_NANO)
     #define BOARD_NAME "ARDUINO_NANO"
 
-    // Pinos do Arduino Nano
-    #define PIN_MOTOR_PWM    9
-    #define PIN_MOTOR_DIR    8
-    #define PIN_ENCODER_A    2    // suporte a interrupcao
-    #define PIN_ENCODER_B    3
-    #define PIN_LED_DEBUG    13   // LED onboard
+    // MOTOR A - L298N
+    #define PIN_MOTOR_A_EN    9
+    #define PIN_MOTOR_A_IN1   8
+    #define PIN_MOTOR_A_IN2   7
+
+    // MOTOR B - L298N
+    #define PIN_MOTOR_B_EN    6
+    #define PIN_MOTOR_B_IN1   5
+    #define PIN_MOTOR_B_IN2   4
+
+    // ENCODER A
+    #define PIN_ENCODER_A_A   2        // interrupcao INT0
+    #define PIN_ENCODER_B_A   3        // interrupcao INT1
+
+    // ENCODER B
+    #define PIN_ENCODER_A_B   A0
+    #define PIN_ENCODER_B_B   A1
+
+    #define PIN_LED_DEBUG     13
 
 #else
     #define BOARD_NAME "UNKNOWN"
     #warning Nao foi possivel detectar a placa. Definindo pinos genericos:
 
-    #define PIN_MOTOR_PWM    9
-    #define PIN_MOTOR_DIR    8
-    #define PIN_ENCODER_A    2
-    #define PIN_ENCODER_B    3
-    #define PIN_LED_DEBUG    13
+    // MOTOR A - L298N
+    #define PIN_MOTOR_A_EN    9
+    #define PIN_MOTOR_A_IN1   8
+    #define PIN_MOTOR_A_IN2   7
+
+    // MOTOR B - L298N
+    #define PIN_MOTOR_B_EN    6
+    #define PIN_MOTOR_B_IN1   5
+    #define PIN_MOTOR_B_IN2   4
+
+    // ENCODER A
+    #define PIN_ENCODER_A_A   2
+    #define PIN_ENCODER_B_A   3
+
+    // ENCODER B
+    #define PIN_ENCODER_A_B   A0
+    #define PIN_ENCODER_B_B   A1
+
+    #define PIN_LED_DEBUG     13
 #endif
 
 #endif // CONFIG_H

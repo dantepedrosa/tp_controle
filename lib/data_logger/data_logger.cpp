@@ -1,6 +1,13 @@
 /**
- * Minimal data_logger implementation (original source not provided in input).
- * Writes CSV-like lines to Serial for acquisition and control logging.
+* @file data_logger.cpp
+* @brief Funcoes para facilitar log de dados via Serial.
+*
+* @date nov de 2025
+* 
+* @author Dante Junqueira Pedrosa
+* @author Joao Monteiro Delveaux Silva
+* @author Samantha Kelly de Souza Sena
+* @author Felipe Augusto Cruz Sousa
  */
 
 #include <Arduino.h>
@@ -8,23 +15,31 @@
 #include "config.h"
 
 void setupLogger() {
-    Serial.println("time_ms,pwm,rpm");
+    Serial.println("time_ms,pwmA,rpmA,pwmB,rpmB");
 }
 
-void logRPM(int pwm, float rpm) {
+void logDualMotor(int pwmA, float rpmA, int pwmB, float rpmB) {
     unsigned long t = millis();
     Serial.print(t);
     Serial.print(",");
-    Serial.print(pwm);
+    Serial.print(pwmA);
     Serial.print(",");
-    Serial.println(rpm);
+    Serial.print(rpmA);
+    Serial.print(",");
+    Serial.print(pwmB);
+    Serial.print(",");
+    Serial.println(rpmB);
 }
 
-void logControl(int setpoint, float control) {
+void logControl(float setA, float ctrlA, float setB, float ctrlB) {
     unsigned long t = millis();
     Serial.print(t);
     Serial.print(",");
-    Serial.print(setpoint);
+    Serial.print(setA);
     Serial.print(",");
-    Serial.println(control);
+    Serial.print(ctrlA);
+    Serial.print(",");
+    Serial.print(setB);
+    Serial.print(",");
+    Serial.println(ctrlB);
 }

@@ -12,48 +12,72 @@
 #include "config.h"
 #include <Arduino.h>
 
-volatile unsigned long pulseCount = 0;
-unsigned long lastTime = 0;
-float lastRPM = 0.0f;
+volatile unsigned long pulseCountA = 0;
+volatile unsigned long pulseCountB = 0;
+
+static unsigned long lastTimeA = 0;
+static unsigned long lastTimeB = 0;
+
+static float lastRPMA = 0;
+static float lastRPMB = 0;
 
 void setupEncoderPins() {
-    pinMode(PIN_ENCODER_A, INPUT_PULLUP);
-    pinMode(PIN_ENCODER_B, INPUT_PULLUP);
+    pinMode(PIN_ENCODER_A_A, INPUT_PULLUP);
+    pinMode(PIN_ENCODER_B_A, INPUT_PULLUP);
+
+    pinMode(PIN_ENCODER_A_B, INPUT_PULLUP);
+    pinMode(PIN_ENCODER_B_B, INPUT_PULLUP);
 }
 
-void setupEncoderInterrupt() {
-    attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_A), encoderISR, RISING);
+void setupEncoderInterrupts() {
+    attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_A_A), encoderISRA, RISING);
+    attachInterrupt(digitalPinToInterrupt(PIN_ENCODER_A_B), encoderISRB, RISING);
 }
 
-void IRAM_ATTR encoderISR() {
-    pulseCount++;
+void IRAM_ATTR encoderISRA() {
+    pulseCountA++;
 }
 
-unsigned long getPulseCount() {
-    return pulseCount;
+void IRAM_ATTR encoderISRB() {
+    pulseCountB++;
 }
 
-void resetPulseCount() {
-    noInterrupts();
-    pulseCount = 0;
-    interrupts();
-}
-
-float getRPM() {
+float getRPMA() {
     unsigned long now = millis();
-    if (now - lastTime >= (unsigned long)(Ts * 1000)) {
-        noInterrupts();
-        unsigned long pulses = pulseCount;
-        pulseCount = 0;
-        interrupts();
+    unsigned long dt = now - lastTimeA;
 
-        lastRPM = (float)pulses * (60.0f / Ts) / (float)PULSES_PER_REV;
-        lastTime = now;
+    if (dt >= Ts * 1000) {
+        lastRPMA = (pulseCountA * (60000.0f / dt)) / PULSES_PER_REV;
+        lastTimeA = now;
+        pulseCountA = 0;
     }
-    return lastRPM;
+    return lastRPMA;
 }
 
-void filterRPM() {
-    const float alpha = 0.1f;
-    lastRPM = alpha * lastRPM + (1.0f - alpha) * getRPM();
+float getRPMB() {
+    unsigned long now = millis();
+    unsigned long dt = now - lastTimeB;
+
+    if (dt >= Ts * 1000) {
+        lastRPMB = (pulseCountB * (60000.0f / dt)) / PULSES_PER_REV;
+        lastTimeB = now;
+        pulseCountB = 0;
+    }
+    return lastRPMB;
+}
+
+unsigned long getPulseCountA() {
+    return pulseCountA;
+}
+
+unsigned long getPulseCountB() {
+    return pulseCountB;
+}
+
+void resetPulseCountA() {
+    pulseCountA = 0;
+}
+
+void resetPulseCountB() {
+    pulseCountB = 0;
 }

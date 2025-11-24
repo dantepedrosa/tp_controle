@@ -2,10 +2,11 @@
  * @file data_logger.h
  * @brief Rotinas para salvar dados experimentais via Serial.
  *
- * Permite registrar valores de RPM, PWM e tempo, para analise posterior
- * e modelagem da funcao de transferencia real dos motores.
+ * Permite registrar valores de RPM e PWM dos DOIS motores
+ * para analise posterior e modelagem da funcao de transferencia real.
  *
  * @date nov de 2025
+ * 
  * @author Dante Junqueira Pedrosa
  * @author Joao Monteiro Delveaux Silva
  * @author Samantha Kelly de Souza Sena
@@ -16,26 +17,28 @@
 #define DATA_LOGGER_H
 
 /**
- * @brief Inicializa configuracao de log.
- *
- * Cria cabecalhos e prepara a comunicacao serial.
+ * @brief Inicializa configuracao de log e imprime cabeçalho CSV.
  */
 void setupLogger();
 
 /**
- * @brief Registra um dado de RPM e PWM.
+ * @brief Registra os dados dos dois motores.
  *
- * @param pwm Valor de PWM aplicado.
- * @param rpm Valor de RPM medido.
+ * @param pwmA PWM aplicado ao motor A.
+ * @param rpmA RPM do motor A.
+ * @param pwmB PWM aplicado ao motor B.
+ * @param rpmB RPM do motor B.
  */
-void logRPM(int pwm, float rpm);
+void logDualMotor(int pwmA, float rpmA, int pwmB, float rpmB);
 
 /**
- * @brief Registra dados adicionais para controle.
+ * @brief (Opcional) log para controle em malha fechada.
  *
- * @param setpoint Valor de referencia de RPM.
- * @param control Saida calculada pelo controlador.
+ * @param setA Setpoint de RPM motor A.
+ * @param ctrlA Saida do controlador motor A.
+ * @param setB Setpoint de RPM motor B.
+ * @param ctrlB Saida do controlador motor B.
  */
-void logControl(int setpoint, float control);
+void logControl(float setA, float ctrlA, float setB, float ctrlB);
 
 #endif // DATA_LOGGER_H

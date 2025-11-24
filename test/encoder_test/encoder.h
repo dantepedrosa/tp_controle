@@ -19,52 +19,65 @@
 #include <Arduino.h>
 
 /**
- * @brief Configura os pinos utilizados pelo encoder.
+ * @brief Configura os pinos dos encoders A e B.
  *
- * Deve ser chamada apenas uma vez no setup().
+ * Deve ser chamada uma vez no setup().
  */
 void setupEncoderPins();
 
 /**
- * @brief Inicializa a rotina de interrupcao para contagem de pulsos.
+ * @brief Ativa as interrupcoes para ambos os encoders.
  *
- * Deve ser chamada no setup() apos a definicao dos pinos do encoder.
+ * Deve ser chamada apos setupEncoderPins().
  */
-void setupEncoderInterrupt();
+void setupEncoderInterrupts();
 
 /**
- * @brief Calcula e retorna o RPM estimado a partir da contagem de pulsos.
+ * @brief Retorna o RPM estimado do Motor A.
  *
- * @return Valor de RPM como float.
+ * @return RPM do motor A.
  */
-float getRPM();
+float getRPMA();
 
 /**
- * @brief Zera o contador de pulsos do encoder.
+ * @brief Retorna o RPM estimado do Motor B.
  *
- * Usado para iniciar novo ciclo de amostragem.
+ * @return RPM do motor B.
  */
-void resetPulseCount();
+float getRPMB();
 
 /**
- * @brief Aplica um filtro simples (ex: media movel) ao valor de RPM.
+ * @brief Retorna a contagem total de pulsos do encoder A.
  *
- * Opcional. Usado para reduzir ruido da medicao.
+ * @return Pulsos acumulados.
  */
-void filterRPM();
+unsigned long getPulseCountA();
 
 /**
- * @brief Retorna o numero total de pulsos coletados ate o momento.
+ * @brief Retorna a contagem total de pulsos do encoder B.
  *
- * @return Contagem de pulsos como unsigned long.
+ * @return Pulsos acumulados.
  */
-unsigned long getPulseCount();
+unsigned long getPulseCountB();
 
 /**
- * @brief Rotina de interrupcao chamada a cada pulso do encoder.
- *
- * Deve ser declarada com IRAM_ATTR para ESP32.
+ * @brief Zera a contagem de pulsos do encoder A.
  */
-void IRAM_ATTR encoderISR();
+void resetPulseCountA();
+
+/**
+ * @brief Zera a contagem de pulsos do encoder B.
+ */
+void resetPulseCountB();
+
+/**
+ * @brief ISR (interrupcao) chamada a cada pulso do encoder A.
+ */
+void IRAM_ATTR encoderISRA();
+
+/**
+ * @brief ISR (interrupcao) chamada a cada pulso do encoder B.
+ */
+void IRAM_ATTR encoderISRB();
 
 #endif // ENCODER_H

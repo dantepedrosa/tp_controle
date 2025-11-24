@@ -3,7 +3,10 @@
  * @brief Teste unitario do encoder: contagem de pulsos e calculo de RPM.
  *
  * @date nov de 2025
- * @author ...
+ * @author Dante Junqueira Pedrosa
+ * @author Joao Monteiro Delveaux Silva
+ * @author Samantha Kelly de Souza Sena
+ * @author Felipe Augusto Cruz Sousa
  */
 
 #include <Arduino.h>
@@ -12,37 +15,36 @@
 
 void setup() {
     Serial.begin(DEBUG_SERIAL_BAUD);
-    Serial.println("Iniciando teste do ENCODER...");
+    Serial.println("Iniciando teste dos ENCODERS...");
 
     setupEncoderPins();
-    setupEncoderInterrupt();
+    setupEncoderInterrupts();   // (mudou para ativar A e B)
 
-    Serial.println("Movimente o eixo do motor manualmente ou gire a roda.");
+    Serial.println("Gire manualmente as rodas ou mova os motores.");
 
-    // REMOVER COM CIRCUITO - Pisca o LED builtin para indicar que o loop esta rodando
-    pinMode(LED_BUILTIN, OUTPUT);
-
-    digitalWrite(LED_BUILTIN, HIGH);
+    // LED VISUAL DE TESTE (pode remover depois)
+    pinMode(PIN_LED_DEBUG, OUTPUT);
+    digitalWrite(PIN_LED_DEBUG, HIGH);
     delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(1000);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);}
+    digitalWrite(PIN_LED_DEBUG, LOW);
+}
 
 void loop() {
-    float rpm = getRPM();
-    unsigned long pulses = getPulseCount();
+    float rpmA = getRPMA();
+    float rpmB = getRPMB();
 
-    Serial.print("Pulsos = ");
-    Serial.print(pulses);
+    unsigned long pulsesA = getPulseCountA();
+    unsigned long pulsesB = getPulseCountB();
+
+    Serial.print("[ENCODER A] Pulsos = ");
+    Serial.print(pulsesA);
     Serial.print(" | RPM = ");
-    Serial.println(rpm);
+    Serial.println(rpmA);
+
+    Serial.print("[ENCODER B] Pulsos = ");
+    Serial.print(pulsesB);
+    Serial.print(" | RPM = ");
+    Serial.println(rpmB);
 
     delay(100);
 }
