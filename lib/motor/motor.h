@@ -15,25 +15,44 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+#ifndef MOTOR_H
+#define MOTOR_H
+
 /**
- * @brief Configura os pinos utilizados para o controle do motor.
+ * @brief Configura os pinos utilizados pelos motores.
  *
- * Deve ser chamada apenas uma vez no setup().
+ * Deve ser chamada uma vez no setup().
  */
 void setupMotorPins();
 
 /**
- * @brief Define a velocidade e direcao do motor.
+ * @brief Define a velocidade do Motor A (esquerdo).
  *
- * @param pwmValue Valor entre -255 e 255 (sinal define direcao).
+ * @param pwmValue Valor entre -255 e 255 (PWM e direcao).
  */
-void setMotorSpeed(int pwmValue);
+void setMotorSpeedA(int pwmValue);
 
 /**
- * @brief Envia um degrau de PWM para testar resposta em malha aberta.
+ * @brief Define a velocidade do Motor B (direito).
+ *
+ * @param pwmValue Valor entre -255 e 255 (PWM e direcao).
+ */
+void setMotorSpeedB(int pwmValue);
+
+/**
+ * @brief Envia o mesmo degrau de PWM para ambos os motores.
+ *
+ * Usado para testes em malha aberta.
  *
  * @param pwmValue Valor entre 0 e 255.
  */
 void sendStepInput(int pwmValue);
+
+/**
+ * @brief Para ambos os motores imediatamente.
+ *
+ * Define PWM = 0 para os dois motores.
+ */
+void stopMotors();
 
 #endif // MOTOR_H
