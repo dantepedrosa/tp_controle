@@ -16,7 +16,7 @@ int pwmValues[] = {80, 120, 160, 200, 255, -200, -160, -120, -80};
 int pwmIndex = 0;
 unsigned long timerPWM = 0;
 const unsigned long stepTime = 3000;  // 3s por valor
-bool testingMotorA = true;            // alterna entre motor A e B
+bool testingMotorA = true;            // althherna entre motor A e B
 
 void setup() {
     Serial.begin(DEBUG_SERIAL_BAUD);
@@ -36,18 +36,11 @@ void loop() {
 
         int pwm = pwmValues[pwmIndex];
 
-        if (testingMotorA) {
-            setMotorSpeedA(pwm);
-            setMotorSpeedB(0);
-            Serial.print("[MOTOR A] PWM aplicado = ");
-            Serial.println(pwm);
-        } else {
-            setMotorSpeedB(pwm);
-            setMotorSpeedA(0);
-            Serial.print("[MOTOR B] PWM aplicado = ");
-            Serial.println(pwm);
-        }
+        // APLICAR PWM NOS DOIS MOTORES AO MESMO TEMPO:
+        setMotorSpeedA(pwm);
+        setMotorSpeedB(pwm);
 
-        testingMotorA = !testingMotorA;
+        Serial.print("[MOTORES] PWM aplicado = ");
+        Serial.println(pwm);
     }
 }

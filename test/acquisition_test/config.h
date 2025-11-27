@@ -10,7 +10,7 @@
  * Define os pinos adequados para motor, encoder e LED de debug.
  * Tambem define constantes de controle como Ts.
  * 
- * Utilização em ino:
+ * Utilizacao em ino:
  * 
  * @code
  * #include "config.h"
@@ -37,7 +37,7 @@
 #define PULSES_PER_REV 20        // definir real conforme data sheet do encoder
 #endif
 
-// ======= DETECCAO DA PLACA E DEFINIÇÃO DE PINOS =========
+// ======= DETECCAO DA PLACA E DEFINICAO DE PINOS =========
 #if defined(ESP32)
     #define BOARD_NAME "ESP32"
 
@@ -51,13 +51,11 @@
     #define PIN_MOTOR_B_IN1   18
     #define PIN_MOTOR_B_IN2   5
 
-    // ENCODER A
-    #define PIN_ENCODER_A_A   34
-    #define PIN_ENCODER_B_A   35
+    // ENCODER A (APENAS D0)
+    #define PIN_ENCODER_A     34
 
-    // ENCODER B
-    #define PIN_ENCODER_A_B   32
-    #define PIN_ENCODER_B_B   33
+    // ENCODER B (APENAS D0)
+    #define PIN_ENCODER_B     35
 
     #define PIN_LED_DEBUG     2
 
@@ -74,13 +72,11 @@
     #define PIN_MOTOR_B_IN1   D7
     #define PIN_MOTOR_B_IN2   D6
 
-    // ENCODER A
-    #define PIN_ENCODER_A_A   D5
-    #define PIN_ENCODER_B_A   D4
+    // ENCODER A (APENAS D0)
+    #define PIN_ENCODER_A     D5
 
-    // ENCODER B
-    #define PIN_ENCODER_A_B   D0
-    #define PIN_ENCODER_B_B   D1
+    // ENCODER B (APENAS D0)
+    #define PIN_ENCODER_B     D0
 
     #define PIN_LED_DEBUG     D2
 
@@ -93,17 +89,15 @@
     #define PIN_MOTOR_A_IN2   7
 
     // MOTOR B - L298N
-    #define PIN_MOTOR_B_EN    6
-    #define PIN_MOTOR_B_IN1   5
-    #define PIN_MOTOR_B_IN2   4
+    #define PIN_MOTOR_B_EN    4
+    #define PIN_MOTOR_B_IN1   6
+    #define PIN_MOTOR_B_IN2   5
 
-    // ENCODER A
-    #define PIN_ENCODER_A_A   2        // interrupcao INT0
-    #define PIN_ENCODER_B_A   3        // interrupcao INT1
+    // ENCODER A (APENAS D0)
+    #define PIN_ENCODER_A     2        // interrupcao INT0
 
-    // ENCODER B
-    #define PIN_ENCODER_A_B   A0
-    #define PIN_ENCODER_B_B   A1
+    // ENCODER B (APENAS D0)
+    #define PIN_ENCODER_B     3        // interrupcao INT1
 
     #define PIN_LED_DEBUG     13
 
@@ -117,17 +111,15 @@
     #define PIN_MOTOR_A_IN2   7
 
     // MOTOR B - L298N
-    #define PIN_MOTOR_B_EN    6
-    #define PIN_MOTOR_B_IN1   5
-    #define PIN_MOTOR_B_IN2   4
+    #define PIN_MOTOR_B_EN    4
+    #define PIN_MOTOR_B_IN1   6
+    #define PIN_MOTOR_B_IN2   5
 
-    // ENCODER A
-    #define PIN_ENCODER_A_A   2
-    #define PIN_ENCODER_B_A   3
+    // ENCODER A (APENAS D0)
+    #define PIN_ENCODER_A     2
 
-    // ENCODER B
-    #define PIN_ENCODER_A_B   A0
-    #define PIN_ENCODER_B_B   A1
+    // ENCODER B (APENAS D0)
+    #define PIN_ENCODER_B     3
 
     #define PIN_LED_DEBUG     13
 #endif

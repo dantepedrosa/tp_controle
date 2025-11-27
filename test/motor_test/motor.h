@@ -15,8 +15,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-#ifndef MOTOR_H
-#define MOTOR_H
 
 /**
  * @brief Configura os pinos utilizados pelos motores.
