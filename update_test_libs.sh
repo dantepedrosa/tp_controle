@@ -5,7 +5,7 @@ TEST_DIR_ACQ="test/acquisition_test"
 TEST_DIR_ENCODER="test/encoder_test"
 TEST_DIR_MOTOR="test/motor_test"
 TEST_DIR_CONFIG="test/config_test"
-
+TEST_DIR_STRAIGHT_LINE="test/test_straight_line"
 
 # Origem das libs
 SRC_LIB="lib"
@@ -27,8 +27,8 @@ rm -f $TEST_DIR_ACQ/*.cpp
 cp $SRC_INCLUDE/config.h $TEST_DIR_ACQ/
 
 # Copia data_logger
-cp $SRC_LIB/data_logger/data_logger.h $TEST_DIR_ACQ/
-cp $SRC_LIB/data_logger/data_logger.cpp $TEST_DIR_ACQ/
+#cp $SRC_LIB/data_logger/data_logger.h $TEST_DIR_ACQ/
+#cp $SRC_LIB/data_logger/data_logger.cpp $TEST_DIR_ACQ/
 
 # Copia encoder
 cp $SRC_LIB/encoder/encoder.h $TEST_DIR_ACQ/
@@ -85,6 +85,23 @@ cp $SRC_INCLUDE/config.h $TEST_DIR_CONFIG/
 
 echo "Arquivos copiados para $TEST_DIR_CONFIG"
 
+
+##################################
+# 5) STRAIGHT LINE TEST
+##################################
+echo ""
+echo "[STRAIGHT LINE TEST]"
+
+rm -f $TEST_DIR_STRAIGHT_LINE/*.h
+rm -f $TEST_DIR_STRAIGHT_LINE/*.cpp
+
+cp $SRC_INCLUDE/config.h $TEST_DIR_STRAIGHT_LINE/
+cp $SRC_LIB/encoder/encoder.h $TEST_DIR_STRAIGHT_LINE/
+cp $SRC_LIB/encoder/encoder.cpp $TEST_DIR_STRAIGHT_LINE/
+cp $SRC_LIB/motor/motor.h $TEST_DIR_STRAIGHT_LINE/
+cp $SRC_LIB/motor/motor.cpp $TEST_DIR_STRAIGHT_LINE/
+
+echo "Arquivos copiados para $TEST_DIR_STRAIGHT_LINE"
 
 
 echo ""

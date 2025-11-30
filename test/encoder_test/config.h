@@ -27,7 +27,7 @@
 #define CONFIG_H
 
 // ======= TEMPO DE AMOSTRAGEM =======
-#define Ts 0.01f     // tempo de amostragem em segundos (10 ms)
+#define Ts 0.10f     // 0.1 s = 10 Hz
 
 // ======= DEBUG OPCIONAL =======
 #define DEBUG_SERIAL_BAUD 9600
