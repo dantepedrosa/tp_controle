@@ -179,14 +179,6 @@ data/primeira_ordem/motorA/pwm_150.png
 
 ## **Objetivo final**
 
-**Robô andando reto NA VIDA REAL** usando controle automático e modelo obtido matematicamente.
-
-Quando o robô andar RETO sozinho → projeto concluído com sucesso.
-Todos os passos acima garantem isso.
+**Robô andando reto NA VIDA REAL** usando controle automático utilizando malha fechada e modelo obtido matematicamente.
 
 ---
-
-Se quiser **automação total + PID + tunning automático + PlatformIO CI**, posso criar isso para você agora.
-Posso gerar um **fluxo final de entrega do TCC** também.
-
-Próximo passo: **criar o src/main.cpp com malha fechada real?** 🚀
