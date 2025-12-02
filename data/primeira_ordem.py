@@ -5,12 +5,12 @@ from scipy.optimize import curve_fit
 import os
 
 # ======== IMPORT CSV ========
-file = "data/dados_motor.csv"
+file = "data/primeira_ordem/bateria fraca/dados_motor.csv"
 df = pd.read_csv(file)
 
 # ======== ESCOLHER MOTOR ========
 motor = "B"          # trocar para "B" para analisar o outro
-output_dir = f"data/primeira_ordem/motor{motor}/"
+output_dir = f"data/primeira_ordem/bateria fraca/motor{motor}/"
 os.makedirs(output_dir, exist_ok=True)
 
 df = df[df['motor'] == motor]

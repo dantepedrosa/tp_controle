@@ -16,8 +16,8 @@ bool testingMotorA = true;        // alterna motor A / B
 int pwmSteps[] = {100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 255};
 int pwmIndex = 0;
 
-const unsigned long stepDuration  = 5000;  // motor ligado
-const unsigned long pauseDuration = 3000;  // motor parado
+const unsigned long stepDuration  = 4000;  // motor ligado
+const unsigned long pauseDuration = 2000;  // motor parado
 bool inPause = false;
 
 bool finished = false;
