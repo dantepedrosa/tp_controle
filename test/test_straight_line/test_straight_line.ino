@@ -1,6 +1,6 @@
 /**
  * @file test_straight_line.ino
- * @brief Controle para andar em linha reta usando controle diferencial.
+ * @brief Controle em linha reta com modelo de 1a ordem.
  */
 
 #include <Arduino.h>
@@ -8,58 +8,84 @@
 #include "motor.h"
 #include "encoder.h"
 
-// ===== PARAMETROS =====
-const int PWM_BASE = 200;         // PWM nominal para andar para frente
-const float Ts_ms = Ts * 1000.0;  // tempo de amostragem
+// ===== PWM BASE =====
+const int PWM_BASE = 200;
+const float Ts_ms = Ts * 1000.0;
 
-// ===== CONTROLADOR PI DIFERENCIAL =====
-// Controla: erro = rpmA - rpmB
-float Kp = 2.0;
-float Ki = 20.0;
+// ===== GANHOS PI =====
+float Kp = 1.0;
+float Ki = 15.0;
 
-float e = 0, e_prev = 0;
-float corr = 0;                   // correcao no PWM
+// controle
+float e = 0, e_prev = 0, corr = 0;
 
-unsigned long lastControl = 0;
+// tempo
+unsigned long lastT = 0;
+
+// prototipos
+float predictRPM_A(int pwm);
+float predictRPM_B(int pwm);
+
+// codigo das tabelas e interpolacao inserido aqui...
+
+// ===== PREDIÇÃO COM BASE NO MODELO =====
+float predictRPM_A(int pwm) {
+    float K, T;
+    interpModel(modelA, sizeof(modelA)/sizeof(MotorModel), pwm, K, T);
+    return K; // regime permanente
+}
+
+float predictRPM_B(int pwm) {
+    float K, T;
+    interpModel(modelB, sizeof(modelB)/sizeof(MotorModel), pwm, K, T);
+    return K; // regime permanente
+}
 
 void setup() {
     Serial.begin(DEBUG_SERIAL_BAUD);
-
     setupMotorPins();
     setupEncoderPins();
     setupEncoderInterrupts();
 
-    Serial.println("time_ms,rpmA,rpmB,PWM_A,PWM_B,corr");
+    Serial.println("time_ms,rpmA,rpmB,predA,predB,pwmA,pwmB,corr");
 }
 
 void loop() {
     unsigned long now = millis();
-    if (now - lastControl < Ts_ms) return;
-    lastControl = now;
+    if (now - lastT < Ts_ms) return;
+    lastT = now;
 
     // ===== LEITURA =====
     int pA = getSpeedA();
     int pB = getSpeedB();
 
-    float rpmA = (float)pA * (60.0f / Ts) / (float)PULSES_PER_REV;
-    float rpmB = (float)pB * (60.0f / Ts) / (float)PULSES_PER_REV;
+    float rpmA = (float)pA * (60.0f / Ts) / PULSES_PER_REV;
+    float rpmB = (float)pB * (60.0f / Ts) / PULSES_PER_REV;
 
-    // ===== ERRO DIFERENCIAL =====
-    e = rpmA - rpmB;
+    // ===== PREVISAO DO MODELO =====
+    float rpmA_model = predictRPM_A(PWM_BASE);
+    float rpmB_model = predictRPM_B(PWM_BASE);
 
-    // PI
+    // erro real + erro previsto
+    float e_model = rpmA_model - rpmB_model;
+    float e_real  = rpmA - rpmB;
+
+    // erro total utilizado no PI
+    e = e_real + e_model;
+
+    // ===== PI DIFERENCIAL =====
     corr += Kp * (e - e_prev) + Ki * Ts * e;
     e_prev = e;
 
-    // saturacao da correcao
+    // limitar correcao
     if (corr > 80) corr = 80;
     if (corr < -80) corr = -80;
 
-    // PWM dos motores
+    // PWM resultante
     int pwmA = PWM_BASE - corr;
     int pwmB = PWM_BASE + corr;
 
-    // limita para nao permitir valores negativos
+    // nao permitir inverter sentido
     if (pwmA < 0) pwmA = 0;
     if (pwmB < 0) pwmB = 0;
     if (pwmA > 255) pwmA = 255;
@@ -69,16 +95,13 @@ void loop() {
     setMotorSpeedA(pwmA);
     setMotorSpeedB(pwmB);
 
-    // ===== DEBUG =====
-    Serial.print(now);
-    Serial.print(",");
-    Serial.print(rpmA);
-    Serial.print(",");
-    Serial.print(rpmB);
-    Serial.print(",");
-    Serial.print(pwmA);
-    Serial.print(",");
-    Serial.print(pwmB);
-    Serial.print(",");
+    // debug
+    Serial.print(now); Serial.print(",");
+    Serial.print(rpmA); Serial.print(",");
+    Serial.print(rpmB); Serial.print(",");
+    Serial.print(rpmA_model); Serial.print(",");
+    Serial.print(rpmB_model); Serial.print(",");
+    Serial.print(pwmA); Serial.print(",");
+    Serial.print(pwmB); Serial.print(",");
     Serial.println(corr);
 }
