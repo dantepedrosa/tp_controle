@@ -27,7 +27,7 @@
 #define CONFIG_H
 
 // ======= TEMPO DE AMOSTRAGEM =======
-#define Ts 0.10f     // 0.1 s = 10 Hz
+#define Ts 0.01f     // tempo de amostragem em segundos (10 ms)
 
 // ======= DEBUG OPCIONAL =======
 #define DEBUG_SERIAL_BAUD 9600
@@ -43,19 +43,19 @@
 
     // MOTOR A - L298N
     #define PIN_MOTOR_A_EN    23
-    #define PIN_MOTOR_A_IN1   22
-    #define PIN_MOTOR_A_IN2   21
+    #define PIN_MOTOR_A_IN1   21
+    #define PIN_MOTOR_A_IN2   22
 
     // MOTOR B - L298N
-    #define PIN_MOTOR_B_EN    19
+    #define PIN_MOTOR_B_EN    5
     #define PIN_MOTOR_B_IN1   18
-    #define PIN_MOTOR_B_IN2   5
+    #define PIN_MOTOR_B_IN2   19
 
     // ENCODER A (APENAS D0)
-    #define PIN_ENCODER_A     34
+    #define PIN_ENCODER_A     2
 
     // ENCODER B (APENAS D0)
-    #define PIN_ENCODER_B     35
+    #define PIN_ENCODER_B     4
 
     #define PIN_LED_DEBUG     2
 

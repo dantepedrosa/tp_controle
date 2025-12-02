@@ -1,9 +1,6 @@
 MODELOS DE 1a ORDEM
 Motor analisado: B
 
-PWM 100:   G(s) = 0.000 / (0.500s + 1)
-PWM 110:   G(s) = 0.000 / (0.500s + 1)
-PWM 120:   G(s) = 0.000 / (0.500s + 1)
 PWM 130:   G(s) = 9.241 / (0.069s + 1)
 PWM 140:   G(s) = 9.527 / (0.113s + 1)
 PWM 150:   G(s) = 9.331 / (0.095s + 1)
